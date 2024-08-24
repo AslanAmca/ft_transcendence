@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block meta %}
+    <meta name="description" content="Create a new account for the 3D Pong game.">
+    <meta name="keywords" content="3D Pong, sign up, create account, register, join game">
+{% endblock %}
+
+{% block title %}
+    Pong | Sign Up
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex flex-column justify-content-center align-items-center my-auto">
+        <div class="col-11 col-sm-10 col-md-8 col-lg-7 col-xl-6 col-xxl-4 p-4 my-5 bg-body rounded-4 shadow">
+            <form id="signupForm" method="post" enctype="multipart/form-data" action="{% url 'signup' %}" novalidate>
+                {% csrf_token %}
+                <div class="text-center mb-4">
+                    <img class="img-fluid mb-1" width="50" src="{% static 'images/logo.png' %}" alt="Pong Logo">
+                    <h3>Create Account</h3>
+                    <span class="text-muted">
+                        Already have an account?
+                    </span>
+                    <a class="link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
+                       href="{% url 'signin' %}">
+                        Sign In here
+                    </a>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="bi bi-person-fill-lock"></i></span>
+                    {{ form.username }}
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
+                    {{ form.password1 }}
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
+                    {{ form.password2 }}
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="bi bi-eye-fill"></i></span>
+                    {{ form.display_name }}
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="bi bi-person-vcard-fill"></i></span>
+                    {{ form.first_name }}
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="bi bi-person-vcard-fill"></i></span>
+                    {{ form.last_name }}
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person-bounding-box"></i></span>
+                    {{ form.avatar }}
+                </div>
+                <div class="form-text fw-semibold fst-italic mb-4">
+                    If no avatar is selected, the default avatar will be displayed.
+                </div>
+                <div class="form-check fw-semibold mb-3">
+                    <input class="form-check-input" type="checkbox" name="privacy_policy" id="id_privacy_policy"
+                           required>
+                    <label class="form-check-label" for="id_privacy_policy">
+                        I have read and agree to the website
+                    </label>
+                    <span id="privacyPolicy" class="text-primary text-decoration-underline cursor-pointer">
+                        Privacy Policy
+                    </span>
+                </div>
+                <button type="submit" class="btn btn-dark w-100 mt-2">
+                    Sign Up
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="privacyPolicyModal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-shield-fill-check me-1"></i>
+                        Privacy Policy
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    {% include "privacy_policy_text.html" %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block meta %}
+    <meta name="description" content="Connect with other players by sending friend requests in the 3D Pong game.">
+    <meta name="keywords" content="3D Pong, send friend request, gaming community, connect with friends">
+{% endblock %}
+
+{% block title %}
+    Pong | Friend Requests
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid my-4">
+        <div class="row justify-content-center align-items-center gap-5">
+            <div class="col-11 col-md-10 col-lg-9 col-xl-8 col-xxl-7 p-4 rounded-4 bg-body shadow">
+                <h3 class="text-center mb-4">
+                    Outgoing Friend Requests
+                </h3>
+                <form id="sendFriendRequestForm" method="post" enctype="application/x-www-form-urlencoded"
+                      action="{% url 'friend_requests' %}" novalidate>
+                    {% csrf_token %}
+                    <div class="input-group">
+                        {{ form.to_username }}
+                        <button type="submit" class="btn btn-dark">
+                            <i class="bi bi-plus-lg"></i>
+                        </button>
+                    </div>
+                </form>
+                <div class="table-responsive mt-3">
+                    <table class="table text-center table-hover my-auto">
+                        <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Display Name</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for friend in sent_requests %}
+                            <tr id="friendship-{{ friend.friendship_id }}">
+                                <td>{{ friend.username }}</td>
+                                <td>{{ friend.display_name }}</td>
+                                <td>{{ friend.first_name }}</td>
+                                <td>{{ friend.last_name }}</td>
+                                <td>
+                                    <i class="bi bi-trash-fill cursor-pointer text-danger"
+                                       onclick="deleteFriendRequest('{{ friend.friendship_id }}')">
+                                    </i>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-11 col-md-10 col-lg-9 col-xl-8 col-xxl-7 p-4 rounded-4 bg-body shadow">
+                <h3 class="text-center mb-4">
+                    Incoming Friend Requests
+                </h3>
+                <div class="table-responsive">
+                    <table class="table text-center table-hover my-auto">
+                        <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Display Name</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Accept</th>
+                            <th>Reject</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for friend in received_requests %}
+                            <tr id="friendship-{{ friend.friendship_id }}">
+                                <td>{{ friend.username }}</td>
+                                <td>{{ friend.display_name }}</td>
+                                <td>{{ friend.first_name }}</td>
+                                <td>{{ friend.last_name }}</td>
+                                <td>
+                                    <i class="bi bi-check-lg cursor-pointer text-success"
+                                       onclick="acceptFriendRequest('{{ friend.friendship_id }}')"></i>
+                                </td>
+                                <td>
+                                    <i class="bi bi-x-lg cursor-pointer text-danger"
+                                       onclick="rejectFriendRequest('{{ friend.friendship_id }}')"></i>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

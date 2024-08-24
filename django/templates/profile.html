@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block meta %}
+    <meta name="description" content="View and manage your profile in the 3D Pong game. Check your account details.">
+    <meta name="keywords" content="3D Pong, profile, user account, game stats, player information">
+{% endblock %}
+
+{% block title %}
+    Pong | Profile
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex flex-column justify-content-center align-items-center my-auto">
+        <div class="col-11 col-sm-10 col-md-7 col-lg-6 col-xl-5 col-xxl-4 p-4 my-5 bg-body rounded-4 shadow">
+            <form id="profileForm" method="post" enctype="multipart/form-data" action="{% url 'profile' %}" novalidate>
+                {% csrf_token %}
+                <div class="text-center mb-3">
+                    {% if user.avatar %}
+                        <img src="{{ user.avatar.url }}" alt="avatar" class="avatar-big img-thumbnail">
+                    {% else %}
+                        <img src="{% static 'images/default_avatar.jpg' %}" alt="avatar"
+                             class="avatar-big img-thumbnail">
+                    {% endif %}
+                    <h5>{{ user.username }}</h5>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text text-bg-dark">
+                    <i class="bi bi-bar-chart-fill me-2"></i>
+                        Game Statistics
+                    </span>
+                    <input type="text" aria-label="win" class="form-control text-bg-success" value="{{ win_count }}"
+                           disabled>
+                    <input type="text" aria-label="lose" class="form-control text-bg-danger" value="{{ lose_count }}"
+                           disabled>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="bi bi-eye-fill"></i></span>
+                    {{ form.display_name }}
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="bi bi-person-vcard-fill"></i></span>
+                    {{ form.first_name }}
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="bi bi-person-vcard-fill"></i></span>
+                    {{ form.last_name }}
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person-bounding-box"></i></span>
+                    <input type="file" name="avatar" id="id_avatar" accept="image/*" class="form-control"
+                           placeholder="Avatar">
+                </div>
+                <div class="form-text fw-semibold fst-italic mb-3">
+                    If you do not want to change the avatar, leave the field blank.
+                </div>
+                <button type="submit" class="btn btn-dark w-100 mt-2">
+                    Update Profile
+                </button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

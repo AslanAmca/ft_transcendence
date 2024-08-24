@@ -1,0 +1,232 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block meta %}
+    <meta name="description" content="Join a thrilling 8-player tournament in the 3D Pong game.">
+    <meta name="keywords" content="3D Pong, 8-player tournament, competitive gaming, tournament mode">
+{% endblock %}
+
+{% block title %}
+    Pong | Tournament Game
+{% endblock %}
+
+{% block content %}
+    <div id="gameMenu" class="container-fluid my-4">
+        <div class="row justify-content-center align-items-center">
+            <div id="playersScreen"
+                 class="col-11 col-sm-10 col-md-8 col-lg-7 col-xl-6 col-xxl-5 p-4 bg-body rounded-4 shadow">
+                <div class="text-center">
+                    <img class="img-fluid mb-3" width="75" src="{% static 'images/logo.png' %}" alt="Pong Logo">
+                    <h5>Tournament (8) Game Mode</h5>
+                    <hr>
+                    <p>
+                        Player 1 is always the logged-in user. <br>
+                        For other players, you can choose any display name except the display name of registered real
+                        users.
+                    </p>
+                    <hr>
+                </div>
+                <form id="playersForm" method="post" enctype="application/x-www-form-urlencoded"
+                      action="{% url 'game_tournament_8' %}" novalidate>
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="mb-2">
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+                    <div class="d-flex flex-column justify-content-center align-items-center gap-3 mt-4">
+                        <button type="submit" class="btn btn-dark w-75">Next</button>
+                        <a href="{% url 'game' %}" class="btn btn-danger w-75">
+                            Cancel and Go Back
+                        </a>
+                    </div>
+                </form>
+            </div>
+            <div id="tableScreen"
+                 class="d-none col-11 col-sm-10 col-md-8 col-lg-7 col-xl-6 col-xxl-5 p-4 bg-body rounded-4 shadow">
+                <div class="text-center">
+                    <img class="img-fluid mb-3" width="75" src="{% static 'images/logo.png' %}" alt="Pong Logo">
+                    <h5>Tournament (8) Game Mode</h5>
+                    <hr>
+                    <p>
+                        The matches between the players have been announced.<br>
+                        All matches are shown in the table below.
+                    </p>
+                    <p>
+                        After matching, the corresponding row in the table will have a line drawn through it,
+                        indicating that the match is complete.
+                    </p>
+                    <hr>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Level</th>
+                                <th scope="col">Player 1</th>
+                                <th scope="col">Player 2</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">Quarter Final - 1</th>
+                                <td id="player1Name"></td>
+                                <td id="player2Name"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Quarter Final - 2</th>
+                                <td id="player3Name"></td>
+                                <td id="player4Name"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Quarter Final - 3</th>
+                                <td id="player5Name"></td>
+                                <td id="player6Name"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Quarter Final - 4</th>
+                                <td id="player7Name"></td>
+                                <td id="player8Name"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Semi Final - 1</th>
+                                <td id="player9Name"></td>
+                                <td id="player10Name"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Semi Final - 2</th>
+                                <td id="player11Name"></td>
+                                <td id="player12Name"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Final</th>
+                                <td id="player13Name"></td>
+                                <td id="player14Name"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-flex flex-column justify-content-center align-items-center gap-3 mt-4">
+                        <button id="tableNext" type="button" class="btn btn-dark w-75">
+                            Next
+                        </button>
+                        <button id="tablePrevious" type="button" class="btn btn-danger w-75">
+                            Go Back
+                        </button>
+                        <button id="cancelTournament" class="btn btn-danger w-75 d-none">
+                            Cancel Tournament
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id="gameCustomizationScreen"
+                 class="d-none col-11 col-sm-10 col-md-8 col-lg-7 col-xl-6 col-xxl-5 p-4 bg-body rounded-4 shadow">
+                <div class="text-center">
+                    <img class="img-fluid mb-3" width="75" src="{% static 'images/logo.png' %}" alt="Pong Logo">
+                    <h5>Tournament (8) Game Mode</h5>
+                    <hr>
+                    <p>
+                        Some customizations are available for the game.<br>
+                        You can customize the game from the form below.
+                    </p>
+                </div>
+                <hr>
+                <form id="customizationForm" novalidate>
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col">
+                            <label for="player1Color" class="form-label">Player 1 Color</label>
+                            <input id="player1Color" name="player1Color" type="color"
+                                   class="form-control form-control-color"
+                                   value="#1e49de">
+                        </div>
+                        <div class="col">
+                            <label for="player2Color" class="form-label">Player 2 Color</label>
+                            <input id="player2Color" name="player2Color" type="color"
+                                   class="form-control form-control-color"
+                                   value="#ec281f">
+                        </div>
+                        <div class="col">
+                            <label for="ballColor" class="form-label">Ball Color</label>
+                            <input id="ballColor" name="ballColor" type="color"
+                                   class="form-control form-control-color" value="#5dec1f">
+                        </div>
+                        <div class="col">
+                            <label for="groundColor" class="form-label">Ground Color</label>
+                            <input id="groundColor" name="groundColor" type="color"
+                                   class="form-control form-control-color"
+                                   value="#808080">
+                        </div>
+                        <div class="col">
+                            <label for="sceneColor" class="form-label">Scene Color</label>
+                            <input id="sceneColor" name="sceneColor" type="color"
+                                   class="form-control form-control-color"
+                                   value="#808080">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-check mt-3">
+                        <input id="shadow" name="shadow" type="checkbox" value="" class="form-check-input"
+                               checked>
+                        <label class="form-check-label" for="shadow">
+                            Shadow
+                        </label>
+                    </div>
+                    <div class="form-check mt-3">
+                        <input id="sound" name="sound" type="checkbox" value="" class="form-check-input"
+                               checked>
+                        <label class="form-check-label" for="sound">
+                            Sound
+                        </label>
+                    </div>
+                    <div class="form-check mt-3">
+                        <input id="ballAcceleration" name="ballAcceleration" type="checkbox" value=""
+                               class="form-check-input"
+                               checked>
+                        <label class="form-check-label" for="ballAcceleration">
+                            Ball Acceleration
+                        </label>
+                    </div>
+                    <hr>
+                    <div class="text-center">
+                        <h4>Info</h4>
+                        <p>You can pause the game by pressing the <b>P</b> key and resume it by pressing the <b>O</b>
+                            key.</p>
+                    </div>
+                    <div class="d-flex flex-column justify-content-center align-items-center gap-3 mt-4">
+                        <button type="submit" class="btn btn-dark w-75">
+                            Start Game
+                        </button>
+                        <button id="gameCustomizationPrevious" type="button" class="btn btn-danger w-75">
+                            Go Back
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div id="winScreen"
+                 class="d-none col-11 col-sm-10 col-md-8 col-lg-7 col-xl-6 col-xxl-5 p-4 bg-body rounded-4 shadow">
+                <div class="text-center">
+                    <img class="img-fluid mb-3" width="75" src="{% static 'images/logo.png' %}" alt="Pong Logo">
+                    <h5>Tournament (8) Game Mode</h5>
+                    <hr>
+                    <h5>Congratulations!</h5>
+                    <p>The winner of the tournament: <span id="winningPlayer" class="fw-bold"></span></p>
+                    <a href="{% url 'game' %}" class="btn btn-danger w-75 mt-4">
+                        Return to Game Mode Selection
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="gameScreen" class="container-fluid my-4 d-none">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-11 col-lg-10 col-xl-9">
+                <canvas id="gameCanvas" class="w-100 h-100 d-block">
+                </canvas>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/game_tournament_8.js' %}?timestamp={{ timestamp }}" type="module"></script>
+{% endblock %}

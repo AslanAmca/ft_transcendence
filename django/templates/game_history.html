@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block meta %}
+    <meta name="description" content="Review your game history in the 3D Pong game. See the games you've played and the results.">
+    <meta name="keywords" content="3D Pong, game history, match results, player stats, gaming records">
+{% endblock %}
+
+{% block title %}
+    Pong | Game History
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid my-4">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-11 col-md-11 col-lg-10 col-xl-9 col-xxl-7 p-4 rounded-4 bg-body shadow">
+                <h3 class="text-center mb-4">
+                    Game History
+                </h3>
+                <form id="historyForm" method="post" enctype="application/x-www-form-urlencoded"
+                      action="{% url 'game_history' %}" novalidate>
+                    {% csrf_token %}
+                    <div class="input-group">
+                        {{ form.username }}
+                        <button type="submit" class="btn btn-dark">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+                <div class="table-responsive mt-3">
+                    <table class="table text-center table-hover my-auto">
+                        <thead>
+                        <tr>
+                            <th>User Name</th>
+                            <th>User Display Name</th>
+                            <th>Rival Display Name</th>
+                            <th>Status</th>
+                            <th>DateTime</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

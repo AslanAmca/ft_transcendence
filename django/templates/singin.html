@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block meta %}
+    <meta name="description" content="Log in to your 3D Pong game account. Access your profile and join games">
+    <meta name="keywords" content="3D Pong, sign in, login, access account, gaming">
+{% endblock %}
+
+{% block title %}
+    Pong | Sign In
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex flex-column justify-content-center align-items-center my-auto">
+        <div class="col-11 col-sm-9 col-md-7 col-lg-6 col-xl-5 col-xxl-4 p-4 my-5 bg-body rounded-4 shadow">
+            <form id="signinForm" method="post" enctype="application/x-www-form-urlencoded" action="{% url 'signin' %}"
+                  novalidate>
+                {% csrf_token %}
+                <div class="text-center mb-4">
+                    <img class="img-fluid mb-1" width="50" src="{% static 'images/logo.png' %}" alt="Pong Logo">
+                    <h3>Welcome Back</h3>
+                    <span class="text-muted">
+                        Don’t have an account yet?
+                    </span>
+                    <a class="link-offset-2 link-underline link-underline-opacity-0 link-underline-opacity-100-hover"
+                       href="{% url 'signup' %}">
+                        Sign Up here
+                    </a>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="bi bi-person-fill-lock"></i></span>
+                    {{ form.username }}
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
+                    {{ form.password }}
+                </div>
+                <button type="submit" class="btn btn-dark w-100">
+                    Sign In
+                </button>
+                <div class="or py-1">
+                    <hr>
+                </div>
+                <button id="ecoleButton" type="button" class="btn btn-secondary w-100">
+                    <img class="img-fluid" width="50"
+                         src="{% static 'images/ecole.png' %}"
+                         alt="Ecole 42 Logo">
+                    <span>
+                        Sign In With Ecole
+                    </span>
+                </button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

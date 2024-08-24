@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block meta %}
+    <meta name="description" content="View and manage your friends in the 3D Pong game.">
+    <meta name="keywords" content="3D Pong, friends list, manage friends, gaming network">
+{% endblock %}
+
+{% block title %}
+    Pong | Friends
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid my-4">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-11 col-md-10 col-lg-9 col-xl-8 col-xxl-7 p-4 rounded-4 bg-body shadow">
+                <h3 class="text-center mb-4">
+                    Friend List
+                </h3>
+                <div class="table-responsive">
+                    <table class="table text-center table-hover my-auto">
+                        <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Display Name</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Status</th>
+                            <th>Delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for friend in user_friends %}
+                            <tr id="friendship-{{ friend.friendship_id }}">
+                                <td>{{ friend.username }}</td>
+                                <td>{{ friend.display_name }}</td>
+                                <td>{{ friend.first_name }}</td>
+                                <td>{{ friend.last_name }}</td>
+                                {% if friend.status == "online" %}
+                                    <td class="text-success fw-semibold">Online</td>
+                                {% else %}
+                                    <td class="text-danger fw-semibold">Offline</td>
+                                {% endif %}
+                                <td>
+									{% csrf_token %}
+                                    <i class="bi bi-trash-fill cursor-pointer text-danger"
+                                       onclick="deleteFriend('{{ friend.friendship_id }}')">
+									</i>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

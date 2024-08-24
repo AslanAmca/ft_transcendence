@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block meta %}
+    <meta name="description"
+          content="Choose your preferred game mode in the 3D Pong game. Play 1v1 or create a tournament">
+    <meta name="keywords" content="3D Pong, game mode selection, 1v1, tournament, game options">
+{% endblock %}
+
+{% block title %}
+    Pong | Game
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid my-4">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-11 col-sm-11 col-md-9 col-lg-8 col-xl-7 col-xxl-5 p-4 bg-body rounded-4 shadow text-center">
+                <img class="img-fluid mb-3" width="75" src="{% static 'images/logo.png' %}" alt="Pong Logo">
+                <h5>Welcome to the 3D Pong Game.</h5>
+                <hr>
+                <p>
+                    The game has Normal (1v1) and Tournament mode.<br>
+                    <span class="fw-semibold text-decoration-underline">
+                        All games are saved only on behalf of the logged-in user.
+                    </span>
+                </p>
+                <p>
+                    The above rule also applies to Tournament mode.<br>
+                    Each game played and completed by the logged in player is saved.
+                </p>
+                <p class="fw-semibold text-decoration-underline">
+                    The Tournament does not need to end for these games to be saved.<br>
+                    Finished games are saved even if the tournament is incomplete.
+                </p>
+                <hr>
+                <div class="vstack align-items-center gap-4 mt-4">
+                    <a href="{% url 'game_normal' %}" class="btn btn-dark w-50">Normal (1v1)</a>
+                    <a href="{% url 'game_tournament_4' %}" class="btn btn-dark w-50">Tournament (4)</a>
+                    <a href="{% url 'game_tournament_8' %}" class="btn btn-dark w-50">Tournament (8)</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

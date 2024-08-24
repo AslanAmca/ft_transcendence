@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block meta %}
+	<meta name="description" content="Manage your account data with ease. Download your personal data or delete your account and all associated data.">
+	meta name="keywords" content="account data, data privacy, download data, delete account, data security, personal data">
+{% endblock %}
+
+{% block title %}
+	Pong | Account Data
+{% endblock %}
+
+{% block content %}
+	<div class="container-fluid my-4">
+		<div class="row justify-content-center align-items-center">
+			<div id="accountDataElement"
+				class="col-11 col-sm-10 col-md-9 col-lg-8 col-xl-7 col-xxl-6 p-4 rounded-4 bg-body shadow text-center">
+				<h3>Account Data</h3>
+				<p>
+					Your data security is important to us. On this page, you can manage your account information.
+					You have the option to download your personal data or delete your account entirely.
+					Please carefully consider your actions, as deleting your account will permanently remove all
+					associated data.
+				</p>
+				<hr>
+				<div class="mt-3">
+					<h5>Download Account Data</h5>
+					<p>
+						You can delete your account. When you delete your account, all your information will be deleted,
+						including your profile information, game registration and friends.
+					</p>
+					<button id="downloadAccountDataButton" type="button" class="btn btn-dark w-auto">
+						Download Account Data
+					</button>
+				</div>
+				<hr>
+				<div class="mt-3">
+					<h5>Delete Account with Data</h5>
+					<p>
+						You can delete your account. When you delete your account, all your information will be deleted,
+						including your profile information, game registration and friends.
+					</p>
+					<p class="fw-bold">
+						Warning: If you delete your account you will be logged out.
+					</p>
+					{% csrf_token %}
+					<button id="deleteAccountButton" type="button" class="btn btn-danger w-auto">
+						Delete Account
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

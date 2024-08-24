@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block meta %}
+    <meta name="description"
+          content="Read our Privacy Policy to understand how we collect, use, and protect your data.">
+    <meta name="keywords" content="3D Pong, privacy policy, cookie policy, user policy, data protection, gdpr">
+{% endblock %}
+
+{% block title %}
+    Pong | Privacy Policy
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid my-4">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-11 col-sm-10 col-md-9 col-lg-8 col-xl-7 p-4 rounded-4 bg-body shadow">
+                {% include "privacy_policy_text.html" %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,48 @@
+.or {
+    position: relative;
+    text-align: center;
+}
+
+.or::after {
+    content: "||";
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 0 5px;
+}
+
+.dropdown {
+    cursor: pointer;
+}
+
+.dropdown-item.active {
+    background-color: #393f45;
+    color: whitesmoke !important;
+}
+
+.dropdown-item:focus {
+    background-color: #2c3034;
+}
+
+.avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.avatar-big {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
