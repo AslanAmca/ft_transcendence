@@ -137,7 +137,9 @@ class ProfileForm(forms.ModelForm):
     def clean_display_name(self):
         invalid_endings = ['ecole', 'ecole42', 'ecole_42']
         display_name = self.cleaned_data.get('display_name')
-        if display_name and display_name.endswith(tuple(invalid_endings)):
+        username = self.instance.username
+
+        if display_name.endswith(tuple(invalid_endings)) and not username.endswith('@ecole'):
             raise forms.ValidationError("The display name must not end with ecole or ecole42.")
         return display_name
 

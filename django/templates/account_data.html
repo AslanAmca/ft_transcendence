@@ -4,7 +4,7 @@
 
 {% block meta %}
 	<meta name="description" content="Manage your account data with ease. Download your personal data or delete your account and all associated data.">
-	meta name="keywords" content="account data, data privacy, download data, delete account, data security, personal data">
+	<meta name="keywords" content="account data, data privacy, download data, delete account, data security, personal data">
 {% endblock %}
 
 {% block title %}
@@ -41,9 +41,16 @@
 						You can delete your account. When you delete your account, all your information will be deleted,
 						including your profile information, game registration and friends.
 					</p>
-					<p class="fw-bold">
-						Warning: If you delete your account you will be logged out.
-					</p>
+					<ul class="list-unstyled fw-bold text-start mt-3">
+						<li>
+							Warning: If you delete your account you will be logged out.
+						</li>
+						<li>
+							Warning: If you are logged in via Ecole, your account will be deleted,
+							but the permission you gave for your Intra account will still be valid.
+							If you want to remove the permission, you must do it via Intra.
+						</li>
+					</ul>
 					{% csrf_token %}
 					<button id="deleteAccountButton" type="button" class="btn btn-danger w-auto">
 						Delete Account
