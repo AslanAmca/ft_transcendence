@@ -47,8 +47,8 @@ export default class PongGame {
             .createLights(3, 5, 4, 4)
             .createGround(10, 5)
             .createWalls(10, 0.3, 0.1)
-            .createPlayers(0.15, 0.2, 0.85, 0.03)
-            .createBall(0.09, 0.039);
+            .createPlayers(0.15, 0.2, 0.85, 0.05)
+            .createBall(0.09, 0.06);
 
         // Oyun alanında ki skor görünümünü oluştur.
         this.fontLoader = new FontLoader();
