@@ -15,6 +15,6 @@ stop:
 prune: down
 	docker system prune --all --volumes --force
 
-re: clear up
+re: prune up
 
 .PHONY: all up down start stop prune re
